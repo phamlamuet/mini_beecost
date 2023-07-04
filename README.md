@@ -1,2 +1,4 @@
 # mini_beecost : product_detail page
- ``` $ docker-compose up -d --build ```
+
+Build the images and spin up the containers:
+    $ docker-compose up -d --build
