@@ -1,2 +1,2 @@
 # mini_beecost : product_detail page
-  $ docker-compose up -d --build
+ ``` $ docker-compose up -d --build ```
