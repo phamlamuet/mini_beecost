@@ -88,3 +88,9 @@ sw.*
 
 # Vim swap files
 *.swp
+
+
+mini-beecost-venv/
+
+__pycache__/
+*.pyc
