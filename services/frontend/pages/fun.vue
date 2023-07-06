@@ -1,5 +1,15 @@
 <template>
-    <h1 class="text-3xl font-bold underline text-red-100">
-      Hello world!
-    </h1>
+   <div>
+     <Header/>
+   </div>
   </template>
+<script>
+import SearchBox from "@/components/SearchBox.vue";
+import Header from "@/components/Header.vue";
+export default {
+  components:{
+    SearchBox,
+    Header
+  }
+}
+</script>

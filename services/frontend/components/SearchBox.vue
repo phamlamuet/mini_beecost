@@ -1,8 +1,8 @@
 <template>
-    <div class="flex justify-center items-center h-screen relative">
+    <div class="flex justify-center items-center relative">
       <div class="search-box">
         <input
-          class="placeholder-gray-400 w-full border border-gray-300 bg-white h-10 px-5 pr-12 rounded-full text-base focus:outline-none text-gray-800 grow"
+          class="placeholder-gray-400 w-full border border-gray-300 bg-white h-10 px-5 pr-12 rounded-full text-base focus:outline-none text-gray-800 flex-grow"
           type="text"
           v-model="searchTerm"
           @input="handleInput"
@@ -52,7 +52,7 @@ export default {
 
 <style scoped>
 
- img {
+img {
     width: 20px;
     height: 20px;
 }

@@ -21,7 +21,7 @@ app.add_middleware(
 
 @app.get("/")
 def home():
-    return {"MiniBeecost"}
+    return {"Mini-Beecost"}
 
 @app.get("/get_product_base_id")
 def get_product_base_id(url: str):
