@@ -50,10 +50,18 @@ export default {
       thumbnailWrapperWidth: 0,
     };
   },
+  props: {
+    url_images: {
+      type: Array,
+      default: []
+    },
+    
+  },
   mounted() {
     this.$nextTick(() => {
       this.thumbnailWrapperWidth = this.$refs.thumbnailContainer.offsetWidth;
     });
+
   },
   computed: {
     currentImage() {

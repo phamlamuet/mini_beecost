@@ -7,7 +7,7 @@
       <div class="product-container ">
 
         <div class="w-full flex items-center lg:items-start flex-col lg:flex-row mb-4 lg:mb-6 px-2 sm:px-0">
-          <ProductImageAlbum :product="product" class=" w-full lg:w-1/2 flex-shrink-0 mr-4 lg:p-6 lg:border rounded-xl" />
+          <ProductImageAlbum :url_images="url_images" class=" w-full lg:w-1/2 flex-shrink-0 mr-4 lg:p-6 lg:border rounded-xl" />
 
           <div class = "flex-grow mx-6 lg:mx-auto w-full lg:w-1/2">
             <ProductStockInfo class="p-8"/>
@@ -81,7 +81,8 @@ export default {
       keywords: [],
       priceHistory: {},
       compareProducts: {},
-      recentProducts: {}
+      recentProducts: {},
+      url_images : []
     };
   },
   async asyncData() {
@@ -110,7 +111,12 @@ export default {
       console.log('compare product' + this.compareProducts);
       this.recentProducts = await fetchRecentProducts(product_base_id);
       console.log('recent product ' + this.recentProducts);
+
       this.categories = this.product.categories;
+
+      console.log('list of categoiries ' + JSON.stringify(this.categories));
+      console.log('list of images ' + JSON.stringify(this.product.url_images));
+      this.url_images = JSON.parse(JSON.stringify(this.product.url_images));
     }
   }
   ,
