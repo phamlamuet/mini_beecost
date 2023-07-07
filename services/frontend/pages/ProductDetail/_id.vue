@@ -1,14 +1,20 @@
 <template>
   <div class="body-container flex justify-center items-center ">
-  <div class="w-2/3">
-    <div>
-      <Breadcrumb :categories="categories" />
-    </div>
-    <div class="product-container flex ">
-      <div class="border-dotted border-2 ">
-        <ProductImageAlbum :product="product" class="w-1/2 border-solid border p-8 rounded-lg border-slate-200 "/>
+    <div class="w-2/3">
+      <div>
+        <Breadcrumb :categories="categories" />
       </div>
-    </div>
+      <div class="product-container ">
+
+        <div class="w-full flex items-center lg:items-start flex-col lg:flex-row mb-4 lg:mb-6 px-2 sm:px-0">
+          <ProductImageAlbum :product="product" class=" w-full lg:w-1/2 flex-shrink-0 mr-4 lg:p-6 lg:border rounded-xl" />
+
+          <div class = "flex-grow mx-6 lg:mx-auto w-full lg:w-1/2">
+            <ProductStockInfo class="p-8"/>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
@@ -21,7 +27,7 @@ import apiProductReview from "@/api/product/ApiProductReview";
 import apiProductRelated from "@/api/product/ApiProductRelated";
 import apiStaticKeyword from "@/api/product/ApiStaticKeyword";
 import Breadcrumb from "../../components/Breadcrumb.vue";
-import ProductInfo from "../../components/ProductInfo.vue";
+import ProductStockInfo from "../../components/ProductStockInfo.vue";
 import ProductImageAlbum from "../../components/ProductImageAlbum.vue";
 // Fetch functions
 const fetchRelatedProduct = async (product_base_id) => {
@@ -60,7 +66,8 @@ const fetchRecentProducts = (product) => {
 
 export default {
   components: {
-    Breadcrumb
+    Breadcrumb,
+    ProductStockInfo
   },
   props: {
     // Your component's props go here
