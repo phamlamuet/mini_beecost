@@ -11,14 +11,15 @@
 <!--  </div>-->
 <!--</template>-->
 <template>
-<div class="header-container flex justify-center items-center">
-
-  <div class="flex-shrink-0 mr-12">
+<div class="header-container">  
+<div class=" flex justify-center items-center w-full">
+  <div class="flex-shrink-0 mr-6">
       <MiniBeecostLogo />
     </div>
-  <div class="flex ">
+  <div class="flex-grow">
       <SearchBox />
   </div>
+</div>
 </div>
 </template>
 <script>
@@ -37,4 +38,5 @@ export default {
   border-bottom: 1px solid #ccc; /* Add a 1px solid border at the bottom */
   padding: 10px; /* Optional: Add padding to create some space around the header */
 }
+
 </style>

@@ -1,6 +1,6 @@
 <template>
    <div>
-     <Header/>
+     <SearchBox/>
    </div>
   </template>
 <script>
