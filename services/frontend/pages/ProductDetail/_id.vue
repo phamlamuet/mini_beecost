@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <h1>Product Detail</h1>
+  <div class="body-container flex justify-center items-center flex-row">
+    <div>
+      <Breadcrumb :categories="categories" />
+    </div>
+    <div class="product-container">
+      <h1>this is product position</h1>
+    </div>
   </div>
 </template>
 
@@ -11,13 +16,14 @@ import apiProductDetail from "@/api/product/ApiProductDetail";
 import apiProductReview from "@/api/product/ApiProductReview";
 import apiProductRelated from "@/api/product/ApiProductRelated";
 import apiStaticKeyword from "@/api/product/ApiStaticKeyword";
+import Breadcrumb from "../../components/Breadcrumb.vue";
 // Fetch functions
 const fetchRelatedProduct = async (product_base_id) => {
   const related_products = await apiProductRelated.ApiGetProductRelated(product_base_id);
   return related_products;
 };
 
-const fetchReview = async (product_id)  => {
+const fetchReview = async (product_id) => {
   const review = await apiProductReview.apiGetProductReview(product_id);
   return review;
 };
@@ -38,7 +44,7 @@ const fetchCompareProducts = (product) => {
 
 const fetchProductDetail = async (product) => {
   const product_dt = await apiProductDetail.apiGetProductDetail(product);
-  return product_dt.data;
+  return product_dt.data.product_base;
 };
 
 const fetchRecentProducts = (product) => {
@@ -47,12 +53,16 @@ const fetchRecentProducts = (product) => {
 };
 
 export default {
+  components: {
+    Breadcrumb
+  },
   props: {
     // Your component's props go here
   },
   data() {
     return {
       product: {},
+      categories: [],
       relatedProducts: [],
       reviews: [],
       keywords: [],
@@ -78,33 +88,33 @@ export default {
       // this.relatedProducts = await fetchRelatedProduct(product_base_id);
       // console.log('recent product' +this.recentProducts);
       this.reviews = await fetchReview(product_base_id);
-      console.log('review of product' +this.reviews);
+      console.log('review of product' + this.reviews);
       this.keywords = await fetchKeyword(product_base_id);
-      console.log('static keyword' +this.keywords);
+      console.log('static keyword' + this.keywords);
       this.priceHistory = await fetchPriceHistory(product_base_id);
-      console.log('price history'+ this.priceHistory);
+      console.log('price history' + this.priceHistory);
       this.compareProducts = await fetchCompareProducts(product_base_id);
-      console.log('compare product'+this.compareProducts);
+      console.log('compare product' + this.compareProducts);
       this.recentProducts = await fetchRecentProducts(product_base_id);
-      console.log('recent product '+ this.recentProducts);
+      console.log('recent product ' + this.recentProducts);
+      this.categories = this.product.categories;
     }
   }
   ,
-    head()
-    {
-      // Your page's head section goes here
-    }
+  head() {
+    // Your page's head section goes here
+  }
   ,
-    computed: {
-      // Your computed properties go here
-    }
+  computed: {
+    // Your computed properties go here
+  }
   ,
-    methods: {
-      // Your component's methods go here
-    },
+  methods: {
+    // Your component's methods go here
+  },
 
-    layout: 'product_detail_layout',
-  };
+  layout: 'product_detail_layout',
+};
 </script>
 
 <style scoped>
