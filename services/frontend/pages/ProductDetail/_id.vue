@@ -1,11 +1,14 @@
 <template>
-  <div class="body-container">
+  <div class="body-container flex justify-center items-center ">
+  <div class="w-2/3">
     <div>
       <Breadcrumb :categories="categories" />
     </div>
-    <div class="product-container flex">
-      <ProductImageAlbum :product="product" />
-      <!-- <ProductInfo :product="product" /> -->
+    <div class="product-container flex ">
+      <div class="border-dotted border-2 ">
+        <ProductImageAlbum :product="product" class="w-1/2 border-solid border p-8 rounded-lg border-slate-200 "/>
+      </div>
+    </div>
     </div>
   </div>
 </template>
