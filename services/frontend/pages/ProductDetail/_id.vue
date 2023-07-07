@@ -7,42 +7,43 @@
 <script>
 // Import statements go here
 import apiProductPriceCompare from "@/api/product/ApiProductPriceCompare";
-import apiProductRelated from "@/api/product/ApiProductRelated";
 import apiProductDetail from "@/api/product/ApiProductDetail";
-import apiProductRecommendation from "@/api/product/ApiProductRecommendation";
 import apiProductReview from "@/api/product/ApiProductReview";
-import ApiProductRelated from "@/api/product/ApiProductRelated";
-
+import apiProductRelated from "@/api/product/ApiProductRelated";
+import apiStaticKeyword from "@/api/product/ApiStaticKeyword";
 // Fetch functions
-const fetchRelatedProduct = (product) => {
-
+const fetchRelatedProduct = async (product_base_id) => {
+  const related_products = await apiProductRelated.ApiGetProductRelated(product_base_id);
+  return related_products;
 };
 
-const fetchReview = (product) => {
-  console.log('list of reviews');
+const fetchReview = async (product_id)  => {
+  const review = await apiProductReview.apiGetProductReview(product_id);
+  return review;
 };
 
-const fetchKeyword = (product) => {
-  console.log('list of keywords');
+const fetchKeyword = async (product) => {
+  const keywords = await apiStaticKeyword.apiGetKeyWordStaticSearch(product);
+  return keywords
 };
 
-const fetchPriceHistory = (product) => {
-  console.log('price history data');
+const fetchPriceHistory = (product, current_price) => {
+  return null;
 };
 
 const fetchCompareProducts = (product) => {
   console.log('list of compare products');
+  return null;
 };
 
 const fetchProductDetail = async (product) => {
-  console.log('product detail data');
   const product_dt = await apiProductDetail.apiGetProductDetail(product);
-  console.log('got product detail' + product_dt)
-  return product_dt;
+  return product_dt.data;
 };
 
 const fetchRecentProducts = (product) => {
   console.log('list of recent products');
+  return null;
 };
 
 export default {
@@ -72,13 +73,20 @@ export default {
         product_base_id
       );
 
+      console.log(this.product);
 
-      this.relatedProducts = await fetchRelatedProduct(product_base_id);
+      // this.relatedProducts = await fetchRelatedProduct(product_base_id);
+      // console.log('recent product' +this.recentProducts);
       this.reviews = await fetchReview(product_base_id);
+      console.log('review of product' +this.reviews);
       this.keywords = await fetchKeyword(product_base_id);
+      console.log('static keyword' +this.keywords);
       this.priceHistory = await fetchPriceHistory(product_base_id);
+      console.log('price history'+ this.priceHistory);
       this.compareProducts = await fetchCompareProducts(product_base_id);
+      console.log('compare product'+this.compareProducts);
       this.recentProducts = await fetchRecentProducts(product_base_id);
+      console.log('recent product '+ this.recentProducts);
     }
   }
   ,

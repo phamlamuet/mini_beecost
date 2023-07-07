@@ -1,19 +1,18 @@
 <template>
-    <div class="flex justify-center items-center relative">
-      <div class="search-box">
+    <div class="flex justify-center items-center">
+
         <input
-          class="placeholder-gray-400 w-full border border-gray-300 bg-white h-10 px-5 pr-12 rounded-full text-base focus:outline-none text-gray-800 flex-grow"
+          class="placeholder-gray-400 w-full border border-gray-300 bg-white h-10 px-5 pr-12 rounded-full text-base focus:outline-none text-gray-800 flex-grow max-w-xl"
           type="text"
           v-model="searchTerm"
           @input="handleInput"
           @keyup.enter="handleSearch"
           placeholder="Dán link hoặc tìm sản phẩm"
         />
-        <div class="absolute min-w-12 aspect-h1-w1 h-full inset-y-0 right-0 flex items-center justify-center cursor-pointer rounded-r-full text-primary-500 hover:text-blue-500"  >
+        <!-- <div class="absolute min-w-12 aspect-h1-w1 h-full inset-y-0 right-0 flex items-center justify-center cursor-pointer rounded-r-full text-primary-500 hover:text-blue-500"  >
             <img alt="Search Icon" src="~/assets/icons/magnifying-glass.svg"/>
-        </div>
+        </div> -->
       </div>
-    </div>
   </template>
 
 <script>
