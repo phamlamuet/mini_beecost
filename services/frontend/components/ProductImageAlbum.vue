@@ -1,108 +1,146 @@
 <template>
-    <div>
-        <transition-group name='fade' tag='div'>
-          <div v-for="i in [currentIndex]" :key='i'>
-            <img :src="currentImg" />
-          </div>
-        </transition-group>
-        <a class="prev" @click="prev" href='#'>&#10094;</a>
-      <a class="next" @click="next" href='#'>&#10095;</a>
+    <div class="product-gallery">
+      <div class="image-container">
+        <img :src="currentImage" alt="Product Image" />
       </div>
-    </template>
-    
-    <script>
-    export default {
-      name: 'Slider',
-      data() {
-        return {
-          images: [
-            'https://cdn.pixabay.com/photo/2015/12/12/15/24/amsterdam-1089646_1280.jpg',
-            'https://cdn.pixabay.com/photo/2016/02/17/23/03/usa-1206240_1280.jpg',
-            'https://cdn.pixabay.com/photo/2015/05/15/14/27/eiffel-tower-768501_1280.jpg',
-            'https://cdn.pixabay.com/photo/2016/12/04/19/30/berlin-cathedral-1882397_1280.jpg'
+      <div class="thumbnail-container" ref="thumbnailContainer">
+        <div class="thumbnail-wrapper">
+          <button
+            class="thumbnail"
+            v-for="(image, index) in images"
+            :key="index"
+            @click="setCurrentImage(index)"
+            @mouseover="setCurrentImage(index)"
+            :class="{ active: currentImageIndex === index }"
+          >
+            <img :src="image" alt="Thumbnail" />
+          </button>
+        </div>
+      </div>
+      <div class="control-container">
+        <button class="control" @click="selectPreviousImage">
+          Previous
+        </button>
+        <button class="control" @click="selectNextImage">
+          Next
+        </button>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        "images": [
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lfgeb9v05do50e",
+                "https://cf.shopee.vn/file/sg-11134201-23020-patjg1bl67mv54",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw65ock65",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw61gn8ec",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lgoqsfmtvxmbb9",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw672x06e",
+                "https://cf.shopee.vn/file/c1dfff290c2542417eb6c5466ff0cc6a",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw62v7o1b",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw649s4b8",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lfgeb9v05do50e",
+                "https://cf.shopee.vn/file/sg-11134201-23020-patjg1bl67mv54",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw65ock65",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw61gn8ec",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lgoqsfmtvxmbb9",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw672x06e",
+                "https://cf.shopee.vn/file/c1dfff290c2542417eb6c5466ff0cc6a",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw62v7o1b",
+                "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw649s4b8"
             ],
-          timer: null,
-          currentIndex: 0,
+        currentImageIndex: 0,
+        thumbnailWrapperWidth: 0,
+      };
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.thumbnailWrapperWidth = this.$refs.thumbnailContainer.offsetWidth;
+      });
+    },
+    computed: {
+      currentImage() {
+        return this.images[this.currentImageIndex];
+      },
+      thumbnailContainerStyle() {
+        return {
+          width: `${this.thumbnailWrapperWidth}px`,
+        };
+      },
+    },
+    methods: {
+      setCurrentImage(index) {
+        this.currentImageIndex = index;
+      },
+      selectPreviousImage() {
+        if (this.currentImageIndex > 0) {
+          this.currentImageIndex--;
         }
       },
-    
-      
-        mounted: function() {
-          this.startSlide();
-        },
-      
-        methods: {
-          startSlide: function() {
-            this.timer = setInterval(this.next, 4000);
-          },
-      
-      
-          next: function() {
-            this.currentIndex += 1
-          },
-          prev: function() {
-            this.currentIndex -= 1
-          }
-        },
-      
-        computed: {
-          currentImg: function() {
-            return this.images[Math.abs(this.currentIndex) % this.images.length];
-          }
+      selectNextImage() {
+        if (this.currentImageIndex < this.images.length - 1) {
+          this.currentImageIndex++;
         }
-      
-    }
-    </script>
-    
-    <style>
-    .fade-enter-active,
-    .fade-leave-active {
-      transition: all 0.9s ease;
-      overflow: hidden;
-      visibility: visible;
-      position: absolute;
-      width:100%;
-      opacity: 1;
-    }
-    
-    .fade-enter,
-    .fade-leave-to {
-      visibility: hidden;
-      width:100%;
-      opacity: 0;
-    }
-    
-    img {
-    height:600px;
-    width:100%
-      }
-    
-    .prev, .next {
-      cursor: pointer;
-      position: absolute;
-      top: 40%;
-      width: auto;
-      padding: 16px;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      transition: 0.7s ease;
-      border-radius: 0 4px 4px 0;
-      text-decoration: none;
-      user-select: none;
-    }
-    
-    /* Position the "next button" to the right */
-    .next {
-      right: 0;
-    }
-    
-    .prev {
-      left: 0;
-    }
-    
-    /* On hover, add a black background color with a little bit see-through */
-    .prev:hover, .next:hover {
-      background-color: rgba(0,0,0,0.9);
-    }
-    </style>
+      },
+    },
+  };
+  </script>
+  
+  <style>
+  .product-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1px solid #ccc;
+  }
+  
+  .image-container {
+    margin-bottom: 10px;
+  }
+  
+  .thumbnail-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-bottom: 10px;
+  }
+  
+  .thumbnail-wrapper {
+    display: inline-block;
+  }
+  
+  .thumbnail {
+    display: inline-block;
+    margin-right: 10px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  .thumbnail img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .thumbnail.active {
+    border: 2px solid blue; /* Add your active thumbnail styles here */
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .control-container {
+    margin-top: 10px;
+  }
+  
+  .control {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  </style>
+  

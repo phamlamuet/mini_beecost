@@ -5,7 +5,7 @@
     </div>
     <div class="product-container flex">
       <ProductImageAlbum :product="product" />
-      <ProductInfo :product="product" />
+      <!-- <ProductInfo :product="product" /> -->
     </div>
   </div>
 </template>
