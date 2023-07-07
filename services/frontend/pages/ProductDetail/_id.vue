@@ -1,10 +1,11 @@
 <template>
-  <div class="body-container flex justify-center items-center flex-row">
+  <div class="body-container">
     <div>
       <Breadcrumb :categories="categories" />
     </div>
-    <div class="product-container">
-      <h1>this is product position</h1>
+    <div class="product-container flex">
+      <ProductImageAlbum :product="product" />
+      <ProductInfo :product="product" />
     </div>
   </div>
 </template>
@@ -17,6 +18,8 @@ import apiProductReview from "@/api/product/ApiProductReview";
 import apiProductRelated from "@/api/product/ApiProductRelated";
 import apiStaticKeyword from "@/api/product/ApiStaticKeyword";
 import Breadcrumb from "../../components/Breadcrumb.vue";
+import ProductInfo from "../../components/ProductInfo.vue";
+import ProductImageAlbum from "../../components/ProductImageAlbum.vue";
 // Fetch functions
 const fetchRelatedProduct = async (product_base_id) => {
   const related_products = await apiProductRelated.ApiGetProductRelated(product_base_id);
