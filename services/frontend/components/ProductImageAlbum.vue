@@ -12,7 +12,7 @@
           <div class="thumbnail-wrapper">
             <button
               class="thumbnail"
-              v-for="(image, index) in images"
+              v-for="(image, index) in url_images"
               :key="index"
               @click="setCurrentImage(index)"
               @mouseover="setCurrentImage(index)"
@@ -32,40 +32,26 @@
 
 <script>
 export default {
-  data() {
-    return {
-      images: [
-        // Replace with your actual image URLs
-        "https://cf.shopee.vn/file/vn-11134207-7qukw-lfgeb9v05do50e",
-        "https://cf.shopee.vn/file/sg-11134201-23020-patjg1bl67mv54",
-        "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw65ock65",
-        "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw61gn8ec",
-        "https://cf.shopee.vn/file/vn-11134207-7qukw-lgoqsfmtvxmbb9",
-        "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw672x06e",
-        "https://cf.shopee.vn/file/c1dfff290c2542417eb6c5466ff0cc6a",
-        "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw62v7o1b",
-        "https://cf.shopee.vn/file/vn-11134207-7qukw-lffoyjw649s4b8",
-      ],
-      currentImageIndex: 0,
-      thumbnailWrapperWidth: 0,
-    };
-  },
   props: {
     url_images: {
       type: Array,
-      default: []
+      default: () => []
     },
-    
+  },
+  data() {
+    return {
+      currentImageIndex: 0,
+      thumbnailWrapperWidth: 0,
+    };
   },
   mounted() {
     this.$nextTick(() => {
       this.thumbnailWrapperWidth = this.$refs.thumbnailContainer.offsetWidth;
     });
-
   },
   computed: {
     currentImage() {
-      return this.images[this.currentImageIndex];
+      return this.url_images[this.currentImageIndex];
     },
     thumbnailContainerStyle() {
       return {
@@ -83,7 +69,7 @@ export default {
       }
     },
     selectNextImage() {
-      if (this.currentImageIndex < this.images.length - 1) {
+      if (this.currentImageIndex < this.url_images.length - 1) {
         this.currentImageIndex++;
       }
     },

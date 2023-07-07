@@ -7,14 +7,27 @@
       <div class="product-container ">
 
         <div class="w-full flex items-center lg:items-start flex-col lg:flex-row mb-4 lg:mb-6 px-2 sm:px-0">
-          <ProductImageAlbum :url_images="url_images" class=" w-full lg:w-1/2 flex-shrink-0 mr-4 lg:p-6 lg:border rounded-xl" />
+          <ProductImageAlbum :url_images="url_images"
+            class=" w-full lg:w-1/2 flex-shrink-0 mr-4 lg:p-6 lg:border rounded-xl" />
 
-          <div class = "flex-grow mx-6 lg:mx-auto w-full lg:w-1/2">
-            <ProductStockInfo class="p-8"/>
+          <div class="flex-grow mx-6 lg:mx-auto w-full lg:w-1/2">
+            <h1
+              class="relative product-name flex font-semibold text-base lg:text-lg text-gray-800 select-text mt-4 lg:mt-0">
+              <a draggable="false" class="cursor-text" style="word-break: break-word" :href="href" @click.stop.prevent>
+                {{ this.product.name }}
+              </a>
+            </h1>
+
+            <p class="lg:w-44 flex items-center text-orange-500 font-medium cursor-pointer lg:hover:text-white lg:hover:bg-orange-500  lg:border border-orange-500 rounded-2xl lg:px-2 py-1 my-2 lg:my-4">
+               <span><IconBell class="shake-bell h-5"/></span>
+              <span>Theo doi giam gia</span>
+
+            </p>
+
           </div>
         </div>
-
       </div>
+
     </div>
   </div>
 </template>
@@ -29,6 +42,7 @@ import apiStaticKeyword from "@/api/product/ApiStaticKeyword";
 import Breadcrumb from "../../components/Breadcrumb.vue";
 import ProductStockInfo from "../../components/ProductStockInfo.vue";
 import ProductImageAlbum from "../../components/ProductImageAlbum.vue";
+import IconBell from "../assets/icons/bell.svg"
 // Fetch functions
 const fetchRelatedProduct = async (product_base_id) => {
   const related_products = await apiProductRelated.ApiGetProductRelated(product_base_id);
@@ -82,7 +96,7 @@ export default {
       priceHistory: {},
       compareProducts: {},
       recentProducts: {},
-      url_images : []
+      url_images: []
     };
   },
   async asyncData() {
