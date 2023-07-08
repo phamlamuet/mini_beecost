@@ -79,9 +79,18 @@
           </div>
         </div>
 
-        <div class="recommend-products-section">
+        <div class="recommend-products-section ">
           <p class="text-base font-medium">Gợi ý hôm nay</p>
-          
+          <div class="product-grid">
+          <ProductThumbnail
+            v-for="product in this.lst_recent_products"
+            :key="product.id"
+            :name="product.name"
+            :price="product.price"
+            :url_thumbnail="product.url_thumbnail"
+            class="border-amber-800"
+          />
+          </div>
         </div>
 
 
@@ -103,6 +112,7 @@ import Breadcrumb from "../../components/Breadcrumb.vue";
 import ProductImageAlbum from "../../components/ProductImageAlbum.vue";
 import Keyword from "@/components/Keyword.vue";
 import ProductDescriptionParagraph from "../../components/ProductDescriptionParagraph.vue";
+import ProductThumbnail from "@/components/ProductThumbnail.vue";
 
 // Fetch functions
 const fetchRelatedProduct = async (product_base_id) => {
@@ -234,5 +244,11 @@ export default {
 </script>
 
 <style scoped>
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 30px;
+}
+
 /* Your component-specific styles go here */
 </style>

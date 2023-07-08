@@ -1,7 +1,7 @@
 <template>
   <div class="product-thumbnail">
     <a :href="url" class="thumbnail-link">
-      <img :src="url_thumbnail" :alt="name" class="thumbnail-image" />
+      <img :src="url_thumbnail" :alt="name" class=" " />
       <h3 class="thumbnail-name">{{ name }}</h3>
       <p class="thumbnail-price">{{ price }}</p>
     </a>
@@ -35,7 +35,8 @@ export default {
 
 <style scoped>
 .product-thumbnail {
-  /* Add your styling for the product thumbnail container here */
+  border: 1px solid #ccc;
+  padding: 10px;
 }
 
 .thumbnail-link {
@@ -53,4 +54,10 @@ export default {
 .thumbnail-price {
   /* Add your styling for the price here */
 }
+
+.product-thumbnail:hover {
+  border: 1px solid orange ;
+}
+
+
 </style>
