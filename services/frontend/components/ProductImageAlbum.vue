@@ -1,12 +1,17 @@
 <template>
-  <div class="product-gallery" @keydown.left="selectPreviousImage" @keydown.right="selectNextImage" tabindex="0">
+  <div
+    class="product-gallery"
+    @keydown.left="selectPreviousImage"
+    @keydown.right="selectNextImage"
+    tabindex="0"
+  >
     <div class="image-container">
       <img :src="currentImage" alt="Product Image" />
     </div>
     <div class="thumbnail-slider">
       <div class="controls">
         <button class="control previous p-1 bg-slate-200" @click="selectPreviousImage">
-          &lt
+          &lt;
         </button>
         <div class="thumbnail-container" ref="thumbnailContainer">
           <div class="thumbnail-wrapper">
@@ -22,9 +27,7 @@
             </button>
           </div>
         </div>
-        <button class="control next p-1 bg-slate-200" @click="selectNextImage">
-          >
-        </button>
+        <button class="control next p-1 bg-slate-200" @click="selectNextImage">></button>
       </div>
     </div>
   </div>
@@ -42,11 +45,11 @@ export default {
   props: {
     url_images: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
   },
 
-  mounted() {
+  updated() {
     this.$nextTick(() => {
       this.thumbnailWrapperWidth = this.$refs.thumbnailContainer.offsetWidth;
     });
@@ -71,7 +74,7 @@ export default {
       }
     },
     selectNextImage() {
-      if (this.currentImageIndex < this.images.length - 1) {
+      if (this.currentImageIndex < this.url_images.length - 1) {
         this.currentImageIndex++;
       }
     },

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div>{{ paragraph }}</div>
+    <pre class = "text-gray-500" v-if="!expanded">{{ truncatedText }}</pre>
+    <pre class="text-gray-500" v-else>{{ paragraph }}</pre>
+    <button @click="toggleExpanded" class="text-orange-500 underline">
+      {{ expanded ? 'Show Less' : 'Show More' }}
+    </button>
   </div>
 </template>
 
@@ -9,68 +13,35 @@ export default {
   data() {
     return {
       expanded: false,
-      truncatedText: "",
-      fullText: ""
+      maxLength: 300 // Maximum length for truncated text
     };
   },
   props: {
     paragraph: {
       type: String,
       required: true
-    },
-    maxLength: {
-      type: Number,
-      default: 100
     }
-  },
-  mounted() {
-    this.updateText();
   },
   methods: {
-    updateText() {
-      if (this.paragraph.length > this.maxLength) {
-        this.truncatedText = this.paragraph.substring(0, this.maxLength) + "...";
-        this.fullText = this.paragraph;
-      } else {
-        this.truncatedText = this.paragraph;
-        this.fullText = this.paragraph;
-      }
-    },
-    toggleExpand() {
+    toggleExpanded() {
       this.expanded = !this.expanded;
-    },
-    printParagraph() {
-      window.print();
     }
   },
-  watch: {
-    paragraph() {
-      this.updateText();
+  computed: {
+    truncatedText() {
+      if (!this.paragraph) {
+        return '';
+      }
+      if (this.paragraph.length <= this.maxLength) {
+        return this.paragraph;
+      } else {
+        return this.paragraph.substring(0, this.maxLength) + '...';
+      }
     }
   }
 };
 </script>
 
 <style scoped>
-.paragraph {
-  margin-bottom: 10px;
-}
-
-.read-more {
-  background-color: #3490dc;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.print-button {
-  background-color: #27ae60;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+/* Add your custom styles here */
 </style>

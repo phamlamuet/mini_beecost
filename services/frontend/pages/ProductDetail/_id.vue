@@ -7,13 +7,13 @@
       <div class="product-container ">
 
         <div class="w-full flex items-center lg:items-start flex-col lg:flex-row mb-4 lg:mb-6 px-2 sm:px-0">
-          <ProductImageAlbum :url_images="url_images"
+          <ProductImageAlbum v-if="this.url_images" :url_images="url_images"
             class=" w-full lg:w-1/2 flex-shrink-0 mr-4 lg:p-6 lg:border rounded-xl" />
 
           <div class="flex-grow mx-6 lg:mx-auto w-full lg:w-1/2">
             <h1
               class="relative product-name flex font-semibold text-base lg:text-lg text-gray-800 select-text mt-4 lg:mt-0">
-              <a draggable="false" class="cursor-text" style="word-break: break-word" :href="href" @click.stop.prevent>
+              <a  class="cursor-text" style="word-break: break-word">
                 {{ this.product.name }}
               </a>
             </h1>
