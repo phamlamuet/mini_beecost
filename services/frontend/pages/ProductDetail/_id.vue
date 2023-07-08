@@ -41,32 +41,34 @@
               </div>
 
               <div class="flex flex-col-reverse lg:flex-col items-end lg:items-start">
-                <div class = "flex flex-col lg:flex-row items-end lg:items-center text-xs lg:text-sm">
-                  <p class="mx-1 text-gray-500">rating star : {{Math.round(this.product.rating_avg)}} &#9733;</p>
-                  <p class="mx-1 text-gray-500"> {{this.product.rating_count }} đánh giá</p>
-                  <p class="mx-1 text-gray-500"> {{this.product.historical_sold}} lượt bán</p>
-                  </div>
+                <div class="flex flex-col lg:flex-row items-end lg:items-center text-xs lg:text-sm">
+                  <p class="mx-1 text-gray-500">rating star : {{ Math.round(this.product.rating_avg) }} &#9733;</p>
+                  <p class="mx-1 text-gray-500"> {{ this.product.rating_count }} đánh giá</p>
+                  <p class="mx-1 text-gray-500"> {{ this.product.historical_sold }} lượt bán</p>
+                </div>
               </div>
             </div>
 
 
-            <div v-if="this.lst_static_keywords && this.lst_static_keywords.length"
-                 class="page-section mb-8">
+            <div v-if="this.lst_static_keywords && this.lst_static_keywords.length" class="page-section mb-8">
               <p class="text-base font-medium">Tìm kiếm tương tự</p>
               <div class="overflow-x-scroll hide-scrollbar sm:overflow-hidden">
                 <div class="w-max sm:w-full flex flex-row flex-nowrap sm:flex-wrap">
-                  <Keyword v-for="(keywordItem, idx) in this.lst_static_keywords"
-                               :key="keywordItem.slug"
-                               :slug="keywordItem.slug"
-                               :name="keywordItem.name"
-                               :position="idx"
-                  />
+                  <Keyword v-for="(keywordItem, idx) in this.lst_static_keywords" :key="keywordItem.slug"
+                    :slug="keywordItem.slug" :name="keywordItem.name" :position="idx" />
                 </div>
               </div>
             </div>
 
 
           </div>
+
+
+        </div>
+        <h1>Mo ta san pham</h1>
+        <ProductDescriptionParagraph :paragraph="this.product.description" />
+        <div>
+
         </div>
       </div>
 
@@ -82,11 +84,11 @@ import apiProductReview from "@/api/product/ApiProductReview";
 import apiProductRelated from "@/api/product/ApiProductRelated";
 import apiStaticKeyword from "@/api/product/ApiStaticKeyword";
 import Breadcrumb from "../../components/Breadcrumb.vue";
-import ProductStockInfo from "../../components/ProductStockInfo.vue";
-import PriceInsight from "@/components/PriceInsight.vue";
-import PricePrimary from "../../components/PriceTag.vue"
 import ProductImageAlbum from "../../components/ProductImageAlbum.vue";
 import Keyword from "@/components/Keyword.vue";
+import ProductDescriptionParagraph from "../../components/ProductDescriptionParagraph.vue";
+
+
 // Fetch functions
 const fetchRelatedProduct = async (product_base_id) => {
   const related_products = await apiProductRelated.ApiGetProductRelated(product_base_id);
@@ -125,7 +127,8 @@ const fetchRecentProducts = (product) => {
 export default {
   components: {
     Breadcrumb,
-    ProductStockInfo
+    ProductDescriptionParagraph,
+
   },
   props: {
     // Your component's props go here
@@ -141,7 +144,7 @@ export default {
       compareProducts: {},
       recentProducts: {},
       url_images: [],
-      lst_static_keywords : []
+      lst_static_keywords: []
     };
   },
   async asyncData() {
@@ -179,6 +182,9 @@ export default {
 
       this.lst_static_keywords = await fetchKeyword(product_base_id);
       console.log('list of static keyword' + JSON.stringify((this.lst_static_keywords)));
+
+      const description = this.product.description;
+      console.log('description is ' + description);
 
     }
   }
