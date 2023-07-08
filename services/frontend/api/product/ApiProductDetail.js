@@ -1,4 +1,4 @@
-import {http} from "@/api/http";
+
 import ConfigEndpoint from "@/api/ConfigEndpoint";
 import axios from 'axios';
 const apiGetProductDetail = async (product_id) =>{

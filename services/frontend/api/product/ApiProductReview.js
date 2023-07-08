@@ -2,8 +2,8 @@
 import configEndpoint from "@/api/ConfigEndpoint";
 import axios from "axios";
 
-const apiGetProductReview = async (product_base_id) =>{
-  const url = urlApiProductReview(product_base_id);
+const apiGetProductReview = async (product_base_id, limit = 5, page = 0) =>{
+  const url = urlApiProductReview(product_base_id, limit, page);
   console.log("api url for get product review is " + url);
   try {
     const response = await axios.get(url);

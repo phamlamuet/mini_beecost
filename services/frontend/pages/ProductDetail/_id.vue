@@ -60,15 +60,21 @@
               </div>
             </div>
 
-
           </div>
 
 
         </div>
-        <h1>Mo ta san pham</h1>
+        <p class="text-base font-medium">Mô tả sản phẩm</p>
         <ProductDescriptionParagraph :paragraph="this.product.description" />
-        <div>
 
+        <div>
+          <p class="text-base font-medium">Đánh giá từ người mua</p>
+          <div>
+            <Review class="pb-4" v-for="review in this.reviews"
+                           :review="review"
+                           :key="review.review_base_id"
+            />
+          </div>
         </div>
       </div>
 
@@ -87,7 +93,7 @@ import Breadcrumb from "../../components/Breadcrumb.vue";
 import ProductImageAlbum from "../../components/ProductImageAlbum.vue";
 import Keyword from "@/components/Keyword.vue";
 import ProductDescriptionParagraph from "../../components/ProductDescriptionParagraph.vue";
-
+import ProductReview from "@/components/ProductReview.vue";
 
 // Fetch functions
 const fetchRelatedProduct = async (product_base_id) => {
@@ -96,8 +102,8 @@ const fetchRelatedProduct = async (product_base_id) => {
 };
 
 const fetchReview = async (product_id) => {
-  const review = await apiProductReview.apiGetProductReview(product_id);
-  return review;
+  const reviews = await apiProductReview.apiGetProductReview(product_id);
+  return reviews['reviews'];
 };
 
 const fetchKeyword = async (product) => {
@@ -164,7 +170,7 @@ export default {
       // this.relatedProducts = await fetchRelatedProduct(product_base_id);
       // console.log('recent product' +this.recentProducts);
       this.reviews = await fetchReview(product_base_id);
-      console.log('review of product' + this.reviews);
+      console.log('review of product' + JSON.stringify(this.reviews));
       this.keywords = await fetchKeyword(product_base_id);
       console.log('static keyword' + this.keywords);
       this.priceHistory = await fetchPriceHistory(product_base_id);
@@ -185,6 +191,7 @@ export default {
 
       const description = this.product.description;
       console.log('description is ' + description);
+
 
     }
   }

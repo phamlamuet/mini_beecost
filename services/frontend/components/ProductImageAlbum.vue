@@ -6,12 +6,14 @@
     tabindex="0"
   >
     <div class="image-container">
-      <img :src="currentImage" alt="Product Image" />
+      <div class="current-image-container">
+        <img :src="currentImage" alt="Product Image" class="current-image"/>
+      </div>
     </div>
     <div class="thumbnail-slider">
       <div class="controls">
         <button class="control previous p-1 bg-slate-200" @click="selectPreviousImage">
-          &lt;
+          ‹
         </button>
         <div class="thumbnail-container" ref="thumbnailContainer">
           <div class="thumbnail-wrapper">
@@ -23,11 +25,11 @@
               @mouseover="setCurrentImage(index)"
               :class="{ active: currentImageIndex === index }"
             >
-              <img :src="image" alt="Thumbnail" />
+              <img :src="image" alt="Thumbnail"/>
             </button>
           </div>
         </div>
-        <button class="control next p-1 bg-slate-200" @click="selectNextImage">></button>
+        <button class="control next p-1 bg-slate-200" @click="selectNextImage">›</button>
       </div>
     </div>
   </div>
@@ -146,4 +148,6 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+
 </style>
