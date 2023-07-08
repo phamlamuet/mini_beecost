@@ -19,12 +19,12 @@ const ApiGetProductRecent = async (product_base_id) =>{
 
 
 export default {
-  ApiGetProductRelated
+  ApiGetProductRecent
 }
 
 const urlApiProductRecent = (limit = 20, page = 0) => {
-  // cache 15 phut / luot, chia cho 5 *60 * 1000 mini giay
-  let timeStamp = Math.floor(new Date().valueOf() / 900000) // avoid cache
-  return `${configEndpoint.getUrlBeeCostBackend()}/product/recent/v2?limit=${limit}&t=${timeStamp}`
+  const t = 1876493;
+  //just a random number, not sure how it works??
+  return `${configEndpoint.getUrlBeeCostBackend()}/product/recent/v2?limit=${limit}&t=${t}`
 }
 

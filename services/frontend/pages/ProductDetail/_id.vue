@@ -61,13 +61,15 @@
             </div>
 
           </div>
-
-
         </div>
+
+        <div class="description-section">
         <p class="text-base font-medium">Mô tả sản phẩm</p>
         <ProductDescriptionParagraph :paragraph="this.product.description" />
+        </div>
 
-        <div>
+
+        <div class="review-section">
           <p class="text-base font-medium">Đánh giá từ người mua</p>
           <div>
             <Review class="pb-4" v-for="review in this.reviews"
@@ -76,6 +78,13 @@
             />
           </div>
         </div>
+
+        <div class="recommend-products-section">
+          <p class="text-base font-medium">Gợi ý hôm nay</p>
+          
+        </div>
+
+
       </div>
 
     </div>
@@ -89,45 +98,52 @@ import apiProductDetail from "@/api/product/ApiProductDetail";
 import apiProductReview from "@/api/product/ApiProductReview";
 import apiProductRelated from "@/api/product/ApiProductRelated";
 import apiStaticKeyword from "@/api/product/ApiStaticKeyword";
+import apiProductRecent from "@/api/product/ApiProductRecent";
 import Breadcrumb from "../../components/Breadcrumb.vue";
 import ProductImageAlbum from "../../components/ProductImageAlbum.vue";
 import Keyword from "@/components/Keyword.vue";
 import ProductDescriptionParagraph from "../../components/ProductDescriptionParagraph.vue";
-import ProductReview from "@/components/ProductReview.vue";
 
 // Fetch functions
 const fetchRelatedProduct = async (product_base_id) => {
   const related_products = await apiProductRelated.ApiGetProductRelated(product_base_id);
+  //stub
   return related_products;
 };
 
 const fetchReview = async (product_id) => {
   const reviews = await apiProductReview.apiGetProductReview(product_id);
+  //ok
   return reviews['reviews'];
 };
 
 const fetchKeyword = async (product) => {
   const keywords = await apiStaticKeyword.apiGetKeyWordStaticSearch(product);
+  //ok
   return keywords.lst_query_suggestion;
 };
 
 const fetchPriceHistory = (product, current_price) => {
+  //stub
   return null;
 };
 
 const fetchCompareProducts = (product) => {
   console.log('list of compare products');
+  //stub
   return null;
 };
 
 const fetchProductDetail = async (product) => {
   const product_dt = await apiProductDetail.apiGetProductDetail(product);
+  //ok
   return product_dt.data.product_base;
 };
 
-const fetchRecentProducts = (product) => {
-  console.log('list of recent products');
-  return null;
+const fetchRecentProducts = async () => {
+  const lst_products = await apiProductRecent.ApiGetProductRecent();
+  console.log('recent product '+JSON.stringify(lst_products));
+  return lst_products['products'];
 };
 
 export default {
@@ -150,7 +166,8 @@ export default {
       compareProducts: {},
       recentProducts: {},
       url_images: [],
-      lst_static_keywords: []
+      lst_static_keywords: [],
+      lst_recent_products: []
     };
   },
   async asyncData() {
@@ -191,6 +208,10 @@ export default {
 
       const description = this.product.description;
       console.log('description is ' + description);
+
+      this.lst_recent_products = await fetchRecentProducts();
+
+      console.log('recent in fetch' + this.lst_recent_products);
 
 
     }
