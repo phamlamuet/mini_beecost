@@ -1,10 +1,11 @@
 <template>
-  <div class="product-thumbnail">
+  <div class="product-thumbnail ">
     <a :href="url" class="thumbnail-link">
       <img :src="url_thumbnail" :alt="name" class=" " />
-      <h3 class="thumbnail-name">{{ name }}</h3>
-      <p class="thumbnail-price">{{ price }}</p>
+      <h3 class="thumbnail-name text-gray-800">{{ name }}</h3>
+      <p class="thumbnail-price text-red-500 text-sm sm:text-base font-bold ">{{ price }} đ</p>
     </a>
+
   </div>
 </template>
 
@@ -35,8 +36,9 @@ export default {
 
 <style scoped>
 .product-thumbnail {
-  border: 1px solid #ccc;
-  padding: 10px;
+  border: 1px solid #cccccc;
+  padding: 5px;
+  border-radius: 0.125rem;
 }
 
 .thumbnail-link {

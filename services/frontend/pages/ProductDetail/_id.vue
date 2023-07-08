@@ -63,13 +63,13 @@
           </div>
         </div>
 
-        <div class="description-section">
+        <div class="description-section border-b border-gray-200 my-6 ">
         <p class="text-base font-medium">Mô tả sản phẩm</p>
         <ProductDescriptionParagraph :paragraph="this.product.description" />
         </div>
 
 
-        <div class="review-section">
+        <div class="review-section py-2  my-6 ">
           <p class="text-base font-medium">Đánh giá từ người mua</p>
           <div>
             <Review class="pb-4" v-for="review in this.reviews"
@@ -79,7 +79,7 @@
           </div>
         </div>
 
-        <div class="recommend-products-section ">
+        <div class="recommend-products-section pb-4 border-b border-gray-200 ">
           <p class="text-base font-medium">Gợi ý hôm nay</p>
           <div class="product-grid">
           <ProductThumbnail
@@ -88,7 +88,6 @@
             :name="product.name"
             :price="product.price"
             :url_thumbnail="product.url_thumbnail"
-            class="border-amber-800"
           />
           </div>
         </div>
@@ -247,7 +246,7 @@ export default {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 30px;
+  grid-gap: 20px;
 }
 
 /* Your component-specific styles go here */

@@ -3,7 +3,7 @@
     <pre class = "text-gray-500" v-if="!expanded">{{ truncatedText }}</pre>
     <pre class="text-gray-500" v-else>{{ paragraph }}</pre>
     <button @click="toggleExpanded" class="text-orange-500 underline">
-      {{ expanded ? 'Show Less' : 'Show More' }}
+      {{ expanded ? 'Thu gọn' : 'Xem thêm' }}
     </button>
   </div>
 </template>
