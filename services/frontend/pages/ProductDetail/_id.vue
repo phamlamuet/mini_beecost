@@ -34,16 +34,34 @@
                 class="h-full flex-grow flex justify-between lg:justify-start lg:flex-row lg:space-x-10 lg:items-center mb-3">
                 <PriceTag :price="this.product.price" :price_before_discount="this.product.price_before_discount" />
 
-                <p>Price insight</p>  
+                <p>Price insight</p>
                 <div class="">
                   <button class="rounded bg-orange-500 w-full h-full px-2 md:px-4 text-white">Đến nơi bán</button>
                 </div>
-
-
               </div>
 
-              <div>
-                  <p>Static keyword field</p>
+              <div class="flex flex-col-reverse lg:flex-col items-end lg:items-start">
+                <div class = "flex flex-col lg:flex-row items-end lg:items-center text-xs lg:text-sm">
+                  <p class="mx-1 text-gray-500">rating star : {{Math.round(this.product.rating_avg)}} &#9733;</p>
+                  <p class="mx-1 text-gray-500"> {{this.product.rating_count }} đánh giá</p>
+                  <p class="mx-1 text-gray-500"> {{this.product.historical_sold}} lượt bán</p>
+                  </div>
+              </div>
+            </div>
+
+
+            <div v-if="this.lst_static_keywords && this.lst_static_keywords.length"
+                 class="page-section mb-8">
+              <p class="text-base font-medium">Tìm kiếm tương tự</p>
+              <div class="overflow-x-scroll hide-scrollbar sm:overflow-hidden">
+                <div class="w-max sm:w-full flex flex-row flex-nowrap sm:flex-wrap">
+                  <Keyword v-for="(keywordItem, idx) in this.lst_static_keywords"
+                               :key="keywordItem.slug"
+                               :slug="keywordItem.slug"
+                               :name="keywordItem.name"
+                               :position="idx"
+                  />
+                </div>
               </div>
             </div>
 
@@ -68,6 +86,7 @@ import ProductStockInfo from "../../components/ProductStockInfo.vue";
 import PriceInsight from "@/components/PriceInsight.vue";
 import PricePrimary from "../../components/PriceTag.vue"
 import ProductImageAlbum from "../../components/ProductImageAlbum.vue";
+import Keyword from "@/components/Keyword.vue";
 // Fetch functions
 const fetchRelatedProduct = async (product_base_id) => {
   const related_products = await apiProductRelated.ApiGetProductRelated(product_base_id);
@@ -81,7 +100,7 @@ const fetchReview = async (product_id) => {
 
 const fetchKeyword = async (product) => {
   const keywords = await apiStaticKeyword.apiGetKeyWordStaticSearch(product);
-  return keywords
+  return keywords.lst_query_suggestion;
 };
 
 const fetchPriceHistory = (product, current_price) => {
@@ -121,7 +140,8 @@ export default {
       priceHistory: {},
       compareProducts: {},
       recentProducts: {},
-      url_images: []
+      url_images: [],
+      lst_static_keywords : []
     };
   },
   async asyncData() {
@@ -153,9 +173,13 @@ export default {
 
       this.categories = this.product.categories;
 
-      console.log('list of categoiries ' + JSON.stringify(this.categories));
+      console.log('list of categories ' + JSON.stringify(this.categories));
       console.log('list of images ' + JSON.stringify(this.product.url_images));
       this.url_images = JSON.parse(JSON.stringify(this.product.url_images));
+
+      this.lst_static_keywords = await fetchKeyword(product_base_id);
+      console.log('list of static keyword' + JSON.stringify((this.lst_static_keywords)));
+
     }
   }
   ,

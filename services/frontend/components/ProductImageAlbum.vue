@@ -6,7 +6,7 @@
     <div class="thumbnail-slider">
       <div class="controls">
         <button class="control previous p-1 bg-slate-200" @click="selectPreviousImage">
-          <
+          &lt
         </button>
         <div class="thumbnail-container" ref="thumbnailContainer">
           <div class="thumbnail-wrapper">
