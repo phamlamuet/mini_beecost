@@ -18,11 +18,35 @@
               </a>
             </h1>
 
-            <p class="lg:w-44 flex items-center text-orange-500 font-medium cursor-pointer lg:hover:text-white lg:hover:bg-orange-500  lg:border border-orange-500 rounded-2xl lg:px-2 py-1 my-2 lg:my-4">
-               <span><IconBell class="shake-bell h-5"/></span>
-              <span>Theo doi giam gia</span>
+            <p
+              class="lg:w-44 flex items-center text-orange-500 font-medium cursor-pointer lg:hover:text-white lg:hover:bg-orange-500  lg:border border-orange-500 rounded-2xl lg:px-2 py-1 my-2 lg:my-4">
+              <span><img alt="Search Icon" src="~/assets/icons/bell.svg" /></span>
+              <span>Theo dõi giảm giá</span>
 
+            <p class="flex flex-wrap items-center text-gray-600 mb-4">
+              <span>Giá từ shopee</span>
+              <img class="rounded-full ml-3 h-8" src="~/assets/shopee.jpg" alt="shopee logo">
             </p>
+            </p>
+
+            <div class="flex lg:flex-col justify-between">
+              <div
+                class="h-full flex-grow flex justify-between lg:justify-start lg:flex-row lg:space-x-10 lg:items-center mb-3">
+                <PriceTag :price="this.product.price" :price_before_discount="this.product.price_before_discount" />
+
+                <p>Price insight</p>  
+                <div class="">
+                  <button class="rounded bg-orange-500 w-full h-full px-2 md:px-4 text-white">Đến nơi bán</button>
+                </div>
+
+
+              </div>
+
+              <div>
+                  <p>Static keyword field</p>
+              </div>
+            </div>
+
 
           </div>
         </div>
@@ -41,8 +65,9 @@ import apiProductRelated from "@/api/product/ApiProductRelated";
 import apiStaticKeyword from "@/api/product/ApiStaticKeyword";
 import Breadcrumb from "../../components/Breadcrumb.vue";
 import ProductStockInfo from "../../components/ProductStockInfo.vue";
+import PriceInsight from "@/components/PriceInsight.vue";
+import PricePrimary from "../../components/PriceTag.vue"
 import ProductImageAlbum from "../../components/ProductImageAlbum.vue";
-import IconBell from "../assets/icons/bell.svg"
 // Fetch functions
 const fetchRelatedProduct = async (product_base_id) => {
   const related_products = await apiProductRelated.ApiGetProductRelated(product_base_id);
