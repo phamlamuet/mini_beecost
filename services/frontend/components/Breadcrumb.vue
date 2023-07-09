@@ -1,27 +1,3 @@
-<!--<template>-->
-<!--    <div>-->
-<!--    <p>this is bread crumb</p>-->
-<!--      <ul>-->
-<!--        <li v-for="category in categories" :key="category.id">-->
-<!--           <p>{{ category.name }}</p>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </div>-->
-
-<!--  </template>-->
-<!--  -->
-<!--  <script>-->
-<!--  export default {-->
-<!--    props: {-->
-<!--      categories: {-->
-<!--        type: Array,-->
-<!--        required: true-->
-<!--      }-->
-<!--    }-->
-<!--  };-->
-<!--  </script>-->
-<!-- -->
-
 <template>
   <nav class="flex px-4 sm:px-0" aria-label="Breadcrumb" v-if="categories != null && categories.length > 0">
     <ol class="flex items-center lg:space-x-4 md:space-x-2 overflow-hidden overflow-x-auto hide-scrollbar">
@@ -86,6 +62,6 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="css">
 
 </style>

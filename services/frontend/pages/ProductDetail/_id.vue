@@ -1,5 +1,5 @@
 <template >
-  <div class="body-container flex justify-center items-center">
+  <div class="body-container flex justify-center items-center" v-if="product">
     <div class="w-2/3">
       <div>
         <Breadcrumb v-if="product && categories.length >0" :categories="categories" />
