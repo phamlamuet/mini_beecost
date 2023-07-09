@@ -32,25 +32,38 @@
             </p>
             </p>
 
+
+
             <div class="flex lg:flex-col justify-between">
               <div
                 class="h-full flex-grow flex justify-between lg:justify-start lg:flex-row lg:space-x-10 lg:items-center mb-3">
                 <PriceTag :price="this.product.price" :price_before_discount="this.product.price_before_discount" v-if="this.product.price && this.product.price_before_discount"/>
 
-                <p>Price insight</p>
+<!--                <button class="rounded accent-red-400">Price insight<button/>-->
+                <button class="rounded bg-red-200 text-red-500 px-5 flex items-center">
+
+                  <svg data-v-a76bbde4="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-3 w-4 app-sm:w-5 app-sm:h-5 mr-1">
+                    <path data-v-a76bbde4="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                  </svg>
+
+                  <span class="">6000 đ</span>
+
+                </button>
+
+
                 <div class="">
                   <button class="rounded bg-orange-500 w-full h-full px-2 md:px-4 text-white">Đến nơi bán</button>
                 </div>
               </div>
-
               <div class="flex flex-col-reverse lg:flex-col items-end lg:items-start">
                 <div class="flex flex-col lg:flex-row items-end lg:items-center text-xs lg:text-sm">
-                  <p class="mx-1 text-gray-500">{{ Math.round(this.product.rating_avg) }} &#9733;</p>
-                  <p class="mx-1 text-gray-500"> {{ this.product.rating_count }} đánh giá</p>
-                  <p class="mx-1 text-gray-500"> {{ this.product.historical_sold }} lượt bán</p>
+                  <p class="mx-1 text-gray-500 border-r pr-1">{{ Math.round(this.product.rating_avg) }} &#9733;</p>
+                  <p class="mx-1 text-gray-500 border-r pr-1">{{ this.product.rating_count }} đánh giá</p>
+                  <p class="mx-1 text-gray-500 pr-1">{{ this.product.historical_sold }} lượt bán</p>
                 </div>
               </div>
             </div>
+
 
 
             <div v-if="this.lst_static_keywords && this.lst_static_keywords.length" class="page-section mb-8">
