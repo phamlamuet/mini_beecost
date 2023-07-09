@@ -1,13 +1,13 @@
-<template>
-  <div class="body-container flex justify-center items-center ">
+<template >
+  <div class="body-container flex justify-center items-center">
     <div class="w-2/3">
       <div>
-        <Breadcrumb :categories="categories" />
+        <Breadcrumb v-if="product && categories.length >0" :categories="categories" />
       </div>
       <div class="product-container ">
 
         <div class="w-full flex items-center lg:items-start flex-col lg:flex-row mb-4 lg:mb-6 px-2 sm:px-0">
-          <ProductImageAlbum v-if="this.url_images" :url_images="url_images"
+          <ProductImageAlbum v-if="product && url_images.length >0" :url_images="url_images"
             class=" w-full lg:w-1/2 flex-shrink-0 mr-4 lg:p-6 lg:border rounded-xl" />
 
           <div class="flex-grow mx-6 lg:mx-auto w-full lg:w-1/2">

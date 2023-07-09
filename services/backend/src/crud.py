@@ -1,4 +1,5 @@
 #crud method for shop, product, review, category
+#this code is from beecost-backend
 import re
 def extract_product_base_id_from_url(url):
 
@@ -16,13 +17,6 @@ def extract_product_base_id_from_url(url):
 def calculate_product_base_id(platform_id, product_platform_id, product_seller_platform_id=None):
     if platform_id is None:
         return None
-    """
-    Tính product_base_id nối các giá trị bởi "__"
-    :param platform_id:
-    :param product_platform_id:
-    :param product_seller_platform_id:
-    :return:
-    """
     product_base_id = f'{platform_id}__{product_platform_id}'
     product_base_id += f'__{product_seller_platform_id}' if product_seller_platform_id is not None and str(
         product_platform_id) != '-1' else ''
