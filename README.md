@@ -7,4 +7,4 @@ Build the images and spin up the containers:
 
 example link to search
 
-    https://shopee.vn/L%C4%83n-kh%E1%BB%AD-m%C3%B9i-cao-c%E1%BA%A5p-Old-Spice-h%C3%A0ng-nh%E1%BA%ADp-kh%E1%BA%A9u-M%E1%BB%B9-i.461024965.10113883955
+    https://shopee.vn/Lăn-khử-mùi-cao-cấp-Old-Spice-hàng-nhập-khẩu-Mỹ-i.461024965.10113883955
