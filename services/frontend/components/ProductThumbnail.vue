@@ -1,9 +1,9 @@
 <template>
   <div class="product-thumbnail ">
     <a :href="url" class="thumbnail-link">
-      <img :src="url_thumbnail" :alt="name" class=" " />
-      <h3 class="thumbnail-name text-gray-800">{{ name }}</h3>
-      <p class="thumbnail-price text-red-500 text-sm sm:text-base font-bold ">{{ price }} đ</p>
+      <img :src="url_thumbnail" :alt="name" class=" " v-if="url_thumbnail" />
+      <h3 class="thumbnail-name text-gray-800" v-if="name">{{ name }}</h3>
+      <p class="thumbnail-price text-red-500 text-sm sm:text-base font-bold " v-if="price">{{ price }} đ</p>
     </a>
 
   </div>

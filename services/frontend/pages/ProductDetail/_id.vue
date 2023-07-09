@@ -1,16 +1,19 @@
 <template >
-  <div class="body-container flex justify-center items-center" v-if="product">
-    <div class="w-2/3">
-      <div>
+  <div class="body-container flex justify-center items-center" >
+
+    <div class="w-2/3" v-if="this.product" >
+
+      <div class="bread-crumb-container">
         <Breadcrumb v-if="product && categories.length >0" :categories="categories" />
       </div>
-      <div class="product-container ">
+
+      <div class="product-container  " v-if="this.product">
 
         <div class="w-full flex items-center lg:items-start flex-col lg:flex-row mb-4 lg:mb-6 px-2 sm:px-0">
           <ProductImageAlbum v-if="product && url_images.length >0" :url_images="url_images"
             class=" w-full lg:w-1/2 flex-shrink-0 mr-4 lg:p-6 lg:border rounded-xl" />
 
-          <div class="flex-grow mx-6 lg:mx-auto w-full lg:w-1/2">
+          <div class="flex-grow mx-6 lg:mx-auto w-full lg:w-1/2" v-if="this.product">
             <h1
               class="relative product-name flex font-semibold text-base lg:text-lg text-gray-800 select-text mt-4 lg:mt-0">
               <a  class="cursor-text" style="word-break: break-word">
@@ -32,7 +35,7 @@
             <div class="flex lg:flex-col justify-between">
               <div
                 class="h-full flex-grow flex justify-between lg:justify-start lg:flex-row lg:space-x-10 lg:items-center mb-3">
-                <PriceTag :price="this.product.price" :price_before_discount="this.product.price_before_discount" />
+                <PriceTag :price="this.product.price" :price_before_discount="this.product.price_before_discount" v-if="this.product.price && this.product.price_before_discount"/>
 
                 <p>Price insight</p>
                 <div class="">
@@ -63,13 +66,13 @@
           </div>
         </div>
 
-        <div class="description-section border-b border-gray-200 my-6 ">
+        <div class="description-section border-b border-gray-200 my-6 " v-if="this.product.description">
         <p class="text-lg font-medium">Mô tả sản phẩm</p>
         <ProductDescriptionParagraph :paragraph="this.product.description" />
         </div>
 
 
-        <div class="review-section py-2  my-6 ">
+        <div class="review-section py-2  my-6 " v-if="this.reviews.length > 0 && this.product">
           <p class="text-lg font-medium">Đánh giá từ người mua</p>
           <div>
             <Review class="pb-4" v-for="review in this.reviews"
@@ -88,13 +91,23 @@
             :name="product.name"
             :price="product.price"
             :url_thumbnail="product.url_thumbnail"
+
+            v-if="product.price"
           />
           </div>
         </div>
 
 
+
+
       </div>
 
+    </div>
+
+    <div v-else>
+      <div v-if="!isLoading">
+          <p>not found</p>
+      </div>
     </div>
   </div>
 </template>
@@ -146,7 +159,7 @@ const fetchCompareProducts = (product) => {
 const fetchProductDetail = async (product) => {
   const product_dt = await apiProductDetail.apiGetProductDetail(product);
   //ok
-  return product_dt.data.product_base;
+  return product_dt.product_base;
 };
 
 const fetchRecentProducts = async () => {
@@ -168,7 +181,8 @@ export default {
   },
   data() {
     return {
-      product: {},
+      product : null,
+      isLoading : true,
       categories: [],
       relatedProducts: [],
       reviews: [],
@@ -189,11 +203,15 @@ export default {
     console.log('in product detail page - fetch with product id is ' + product_base_id);
 
     if (product_base_id) {
+      this.loading = true;
       this.product = await fetchProductDetail(
         product_base_id
       );
 
-      console.log(this.product);
+      console.log('this is product '+ this.product);
+    }
+    if(this.product) {
+      console.log('this product is ' + JSON.stringify(this.product));
 
       // this.relatedProducts = await fetchRelatedProduct(product_base_id);
       // console.log('recent product' +this.recentProducts);
@@ -224,8 +242,10 @@ export default {
 
       console.log('recent in fetch' + this.lst_recent_products);
 
-
     }
+    this.isLoading = false;
+
+
   }
   ,
   head() {
