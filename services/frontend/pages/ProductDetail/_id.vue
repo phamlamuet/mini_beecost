@@ -42,7 +42,7 @@
 
               <div class="flex flex-col-reverse lg:flex-col items-end lg:items-start">
                 <div class="flex flex-col lg:flex-row items-end lg:items-center text-xs lg:text-sm">
-                  <p class="mx-1 text-gray-500">rating star : {{ Math.round(this.product.rating_avg) }} &#9733;</p>
+                  <p class="mx-1 text-gray-500">{{ Math.round(this.product.rating_avg) }} &#9733;</p>
                   <p class="mx-1 text-gray-500"> {{ this.product.rating_count }} đánh giá</p>
                   <p class="mx-1 text-gray-500"> {{ this.product.historical_sold }} lượt bán</p>
                 </div>
@@ -64,13 +64,13 @@
         </div>
 
         <div class="description-section border-b border-gray-200 my-6 ">
-        <p class="text-base font-medium">Mô tả sản phẩm</p>
+        <p class="text-lg font-medium">Mô tả sản phẩm</p>
         <ProductDescriptionParagraph :paragraph="this.product.description" />
         </div>
 
 
         <div class="review-section py-2  my-6 ">
-          <p class="text-base font-medium">Đánh giá từ người mua</p>
+          <p class="text-lg font-medium">Đánh giá từ người mua</p>
           <div>
             <Review class="pb-4" v-for="review in this.reviews"
                            :review="review"
@@ -80,7 +80,7 @@
         </div>
 
         <div class="recommend-products-section pb-4 border-b border-gray-200 ">
-          <p class="text-base font-medium">Gợi ý hôm nay</p>
+          <p class="text-lg font-medium">Gợi ý hôm nay</p>
           <div class="product-grid">
           <ProductThumbnail
             v-for="product in this.lst_recent_products"
@@ -159,7 +159,9 @@ export default {
   components: {
     Breadcrumb,
     ProductDescriptionParagraph,
-
+    ProductThumbnail,
+    ProductImageAlbum,
+    Keyword
   },
   props: {
     // Your component's props go here

@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <pre class = "text-gray-500" v-if="!expanded">{{ truncatedText }}</pre>
-    <pre class="text-gray-500" v-else>{{ paragraph }}</pre>
+  <div class="break-words">
+    <div class = "text-gray-500 whitespace-pre-wrap" v-if="!expanded">{{ truncatedText }}</div>
+    <div class="text-gray-500 whitespace-pre-wrap" v-else>{{ paragraph }}</div>
     <button @click="toggleExpanded" class="text-orange-500 underline">
       {{ expanded ? 'Thu gọn' : 'Xem thêm' }}
     </button>
