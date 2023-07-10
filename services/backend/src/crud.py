@@ -38,5 +38,4 @@ def get_product_details_beecost(product_base_id):
     if response.status_code == 200:
         return response.json()
     else:
-        # Handle error case
         return None
