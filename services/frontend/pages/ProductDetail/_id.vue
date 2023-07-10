@@ -1,22 +1,22 @@
 <template >
-  <div class="body-container flex justify-center items-center" >
+  <div class="body-container flex justify-center items-center">
 
-    <div class="w-2/3" v-if="this.product" >
+    <div class="w-2/3" v-if="this.product">
 
       <div class="bread-crumb-container">
-        <Breadcrumb v-if="product && categories.length >0" :categories="categories" />
+        <Breadcrumb v-if="product && categories.length > 0" :categories="categories" />
       </div>
 
       <div class="product-container  " v-if="this.product">
 
         <div class="w-full flex items-center lg:items-start flex-col lg:flex-row mb-4 lg:mb-6 px-2 sm:px-0">
-          <ProductImageAlbum v-if="product && url_images.length >0" :url_images="url_images"
+          <ProductImageAlbum v-if="product && url_images.length > 0" :url_images="url_images"
             class=" w-full lg:w-1/2 flex-shrink-0 mr-4 lg:p-6 lg:border rounded-xl" />
 
           <div class="flex-grow mx-6 lg:mx-auto w-full lg:w-1/2" v-if="this.product">
             <h1
               class="relative product-name flex font-semibold text-base lg:text-lg text-gray-800 select-text mt-4 lg:mt-0">
-              <a  class="cursor-text" style="word-break: break-word">
+              <a class="cursor-text" style="word-break: break-word">
                 {{ this.product.name }}
               </a>
             </h1>
@@ -37,19 +37,10 @@
             <div class="flex lg:flex-col justify-between">
               <div
                 class="h-full flex-grow flex justify-between lg:justify-start lg:flex-row lg:space-x-10 lg:items-center mb-3">
-                <PriceTag :price="this.product.price" :price_before_discount="this.product.price_before_discount" v-if="this.product.price && this.product.price_before_discount"/>
+                <PriceTag :price="this.product.price" :price_before_discount="this.product.price_before_discount"
+                  v-if="this.product.price && this.product.price_before_discount" />
 
-<!--                <button class="rounded accent-red-400">Price insight<button/>-->
-                <button class="rounded bg-red-200 text-red-500 px-5 flex items-center">
-
-                  <svg data-v-a76bbde4="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-3 w-4 app-sm:w-5 app-sm:h-5 mr-1">
-                    <path data-v-a76bbde4="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                  </svg>
-
-                  <span class="">6000 đ</span>
-
-                </button>
-
+                <PriceInsight />
 
                 <div class="">
                   <button class="rounded bg-orange-500 w-full h-full px-2 md:px-4 text-white">Đến nơi bán</button>
@@ -80,33 +71,23 @@
         </div>
 
         <div class="description-section border-b border-gray-200 my-6 " v-if="this.product.description">
-        <p class="text-lg font-medium">Mô tả sản phẩm</p>
-        <ProductDescriptionParagraph :paragraph="this.product.description" />
+          <p class="text-lg font-medium">Mô tả sản phẩm</p>
+          <ProductDescriptionParagraph :paragraph="this.product.description" />
         </div>
 
 
         <div class="review-section py-2  my-6 " v-if="this.reviews.length > 0 && this.product">
           <p class="text-lg font-medium">Đánh giá từ người mua</p>
           <div>
-            <Review class="pb-4" v-for="review in this.reviews"
-                           :review="review"
-                           :key="review.review_base_id"
-            />
+            <Review class="pb-4" v-for="review in this.reviews" :review="review" :key="review.review_base_id" />
           </div>
         </div>
 
         <div class="recommend-products-section pb-4 border-b border-gray-200 ">
           <p class="text-lg font-medium">Gợi ý hôm nay</p>
           <div class="product-grid">
-          <ProductThumbnail
-            v-for="product in this.lst_recent_products"
-            :key="product.id"
-            :name="product.name"
-            :price="product.price"
-            :url_thumbnail="product.url_thumbnail"
-
-            v-if="product.price"
-          />
+            <ProductThumbnail v-for="product in this.lst_recent_products" :key="product.id" :name="product.name"
+              :price="product.price" :url_thumbnail="product.url_thumbnail" v-if="product.price" />
           </div>
         </div>
 
@@ -119,7 +100,7 @@
 
     <div v-else>
       <div v-if="!isLoading">
-          <p>not found</p>
+        <p>not found</p>
       </div>
     </div>
   </div>
@@ -138,6 +119,7 @@ import ProductImageAlbum from "../../components/ProductImageAlbum.vue";
 import Keyword from "@/components/Keyword.vue";
 import ProductDescriptionParagraph from "../../components/ProductDescriptionParagraph.vue";
 import ProductThumbnail from "@/components/ProductThumbnail.vue";
+import PriceInsight from "@/components/PriceInsight.vue";
 
 // Fetch functions
 const fetchRelatedProduct = async (product_base_id) => {
@@ -177,7 +159,7 @@ const fetchProductDetail = async (product) => {
 
 const fetchRecentProducts = async () => {
   const lst_products = await apiProductRecent.ApiGetProductRecent();
-  console.log('recent product '+JSON.stringify(lst_products));
+  console.log('recent product ' + JSON.stringify(lst_products));
   return lst_products['products'];
 };
 
@@ -194,8 +176,8 @@ export default {
   },
   data() {
     return {
-      product : null,
-      isLoading : true,
+      product: null,
+      isLoading: true,
       categories: [],
       relatedProducts: [],
       reviews: [],
@@ -221,9 +203,9 @@ export default {
         product_base_id
       );
 
-      console.log('this is product '+ this.product);
+      console.log('this is product ' + this.product);
     }
-    if(this.product) {
+    if (this.product) {
       console.log('this product is ' + JSON.stringify(this.product));
 
       // this.relatedProducts = await fetchRelatedProduct(product_base_id);

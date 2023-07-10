@@ -1,34 +1,15 @@
 <template>
-  <div class="" v-if="false">
-    <span
-      v-if="priceInsight && priceInsight.delta_price > 0 && priceInsight.current_price === priceInsight.max_price"
-      class="tag-price flex flex-wrap bg-pink-100 text-red-700"
-      :title= +priceInsight.delta_price
-    >
-             <p> priceInsight.delta_price </p>
-  </span>
-    <span
-      v-else-if="priceInsight && priceInsight.delta_price > 0 && priceInsight.current_price < priceInsight.max_price"
-      class="tag-price flex flex-wrap bg-pink-100 text-red-600"
-      :title="priceInsight.delta_price"
-    >
-      <p>{{ priceInsight.delta_price}} </p>
-  </span>
-    <span
-      v-else-if="priceInsight && priceInsight.delta_price < 0 && priceInsight.current_price === priceInsight.min_price"
-      class="tag-price flex flex-wrap bg-green-200 text-green-800"
-      :title="-priceInsight.delta_price"
-    >
-    <p> -priceInsight.delta_price </p>
-  </span>
-    <span
-      v-else-if="priceInsight && priceInsight.delta_price < 0 && priceInsight.current_price > priceInsight.min_price"
-      class="tag-price flex flex-wrap bg-green-200 text-green-700"
-      :title="-priceInsight.delta_price"
-    >
-    <p>-priceInsight.delta_price</p>
-  </span>
-  </div>
+  <button class="rounded bg-red-200 text-red-500 px-5 flex items-center">
+
+    <svg data-v-a76bbde4="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+      class="h-3 w-4 app-sm:w-5 app-sm:h-5 mr-1">
+      <path data-v-a76bbde4="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+    </svg>
+
+    <span class="">6000 đ</span>
+
+  </button>
 </template>
 
 <script>
@@ -45,6 +26,4 @@ export default {
 }
 </script>
 
-<style l>
-
-</style>
+<style l></style>
